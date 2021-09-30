@@ -189,7 +189,7 @@ class ConformerEncoder(nn.Module):
             if isinstance(child, nn.Dropout):
                 child.p = dropout_p
 
-    def forward(self, inputs: Tensor, input_lengths: Tensor) -> Tuple[Tensor, Tensor]:
+    def forward(self, inputs: Tensor, input_lengths: Tensor = torch.IntTensor([1234, 1230, 120])) -> Tuple[Tensor, Tensor]:
         """
         Forward propagate a `inputs` for  encoder training.
 
@@ -211,4 +211,4 @@ class ConformerEncoder(nn.Module):
         for layer in self.layers:
             outputs = layer(outputs)
 
-        return outputs, output_lengths
+        return outputs  # , output_lengths
